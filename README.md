@@ -20,3 +20,4 @@
 
 ERD
 
+<img width="704" alt="스크린샷 2024-02-29 오후 6 36 01" src="https://github.com/yuha00e/spring-lv3/assets/157681548/00c3feea-7326-4aad-8cb5-1079ab66976a">
