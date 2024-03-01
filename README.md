@@ -13,15 +13,6 @@ Spring Lv.3 "스파르타 백오피스(Admin) 서버 만들기"
         - `비밀번호`는  `최소 8자 이상, 15자 이하이며 알파벳 대소문자(a~z, A~Z), 숫자(0~9), 특수문자`로 구성되어야 합니다.
     - 관리자가입 성공을 확인할 수 있는 값을 반환합니다.
         - ex) HTTP Status Code, Error Message …
-    - 참고자료
-        
-        [RegExr: Learn, Build, & Test RegEx](https://regexr.com/3e48o)
-        
-        [정규 표현식](https://ko.wikipedia.org/wiki/정규_표현식)
-        
-        [[Spring] @Valid와 @Validated를 이용한 유효성 검증의 동작 원리 및 사용법 예시 - (1/2)](https://mangkyu.tistory.com/174)
-        
-        [[Spring Boot] @Valid 어노테이션으로 Parameter 검증하기](https://bamdule.tistory.com/35)
         
 - [ ]  로그인 기능
     - 관리자는 `이메일`, `비밀번호`를 입력하여 서버에 로그인을 요청할 수 있습니다.
