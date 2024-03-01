@@ -15,16 +15,26 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(nullable = false, unique = true)
-//    private String username;
-//
-//    @Column(nullable = false)
-//    private String password;
-//
-//    @Column(nullable = false, unique = true)
-//    private String email;
-//
-//    @Column(nullable = false)
-//    @Enumerated(value = EnumType.STRING) // eunm의 이름 그대로를 데이터베이스에 저장한다.
-//    private UserRoleEnum role;
+    @Column(nullable = false, unique = true)
+    private String teacher_name;
+
+    @Column(nullable = false)
+    private int career;
+
+    @Column(nullable = false)
+    private String company;
+
+    @Column(nullable = false, unique = true)
+    private String phone;
+
+    @Column(nullable = false)
+    private String introduction;
+
+    public Teacher(String teacher_name, int career, String company, String phone, String introduction) {
+        this.teacher_name = teacher_name;
+        this.career = career;
+        this.company = company;
+        this.phone = phone;
+        this.introduction = introduction;
+    }
 }
