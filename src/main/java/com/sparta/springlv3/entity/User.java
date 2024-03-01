@@ -25,7 +25,7 @@ public class User {
     private String department;
 
     @Column(nullable = false)
-    private String authority;
+    private String auth;
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -34,8 +34,8 @@ public class User {
     public User(String email, String password, String department, String authority) {
         this.email = email;
         this.password = password;
-        this.department = department;
-        this.authority = authority;
+        this.department = selectedDepartmentString;
+        this.auth = auth;
     }
 }
 
