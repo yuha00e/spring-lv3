@@ -86,7 +86,14 @@ Spring Lv.3 "스파르타 백오피스(Admin) 서버 만들기"
 - [ ]  swagger를 구글링해 보고 프로젝트에 적용해 보세요!
     - swagger란? Open Api Specification(OAS)를 위한 프레임워크 입니다.
         - API들이 가지고 있는 스펙(spec)을 명세, 관리할 수 있으며 백엔드와 프론트엔드가 협업할 때 사용할 수 있습니다!
+     
+          
+ Commit Convention
+ -----
  
+ ![스크린샷 2024-03-01 오후 3 20 00](https://github.com/yuha00e/spring-lv3/assets/157681548/1fecc129-c6c1-4611-8630-6443d1ff7caa)
+ etc : 그 외 메모사항이 있는 경우
+
  
  UCD
  -----
