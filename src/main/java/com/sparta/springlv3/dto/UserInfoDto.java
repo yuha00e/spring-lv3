@@ -12,7 +12,14 @@ public class UserInfoDto {
 
     private String department;
 
-    private String authority;
+    private String auth;
 
     boolean isAdmin;
+
+    public UserInfoDto(String userEmail, String password) {
+        this.email = getEmail();
+        this.password = getPassword();
+    }
 }
+
+

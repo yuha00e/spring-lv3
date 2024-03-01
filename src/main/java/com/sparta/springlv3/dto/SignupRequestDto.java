@@ -20,8 +20,12 @@ public class SignupRequestDto {
     private String department;
 
     @NotBlank
-    private String authority;
+    private String auth;
+
+    @NotBlank
+    private String createUserId;
 
     private boolean admin = false;
     private String adminToken = "";
 }
+
