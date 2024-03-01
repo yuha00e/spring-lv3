@@ -1,5 +1,6 @@
 package com.sparta.springlv3.service;
 
+
 import com.sparta.springlv3.dto.TeacherRequestDto;
 import com.sparta.springlv3.dto.TeacherResponseDto;
 import com.sparta.springlv3.repository.TeacherRepository;
@@ -56,4 +57,5 @@ public class TeacherService {
 //        - 로그인을 통해 발급받은 JWT가 함께 요청됩니다.
 //            - 관리자만 강의 조회가 가능합니다.
 //            - 조회된 강의 목록은 `등록일` 기준 내림차순으로 정렬 되어있습니다.
+
 }

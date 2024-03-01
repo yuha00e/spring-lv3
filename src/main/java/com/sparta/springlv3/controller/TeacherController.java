@@ -1,5 +1,6 @@
 package com.sparta.springlv3.controller;
 
+
 import com.sparta.springlv3.dto.TeacherRequestDto;
 import com.sparta.springlv3.dto.TeacherResponseDto;
 import com.sparta.springlv3.service.TeacherService;
@@ -36,4 +37,5 @@ public class TeacherController {
     public TeacherResponseDto findTeacher(@PathVariable Long teacherId, @PathVariable Long lectureId) {
         return teacherService.findTeacher(teacherId, lectureId);
     }
+
 }
