@@ -13,7 +13,7 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -31,8 +31,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    public User(Long userId, String email, String password, String department, String authority) {
-        this.userId = userId;
+    public User(String email, String password, String department, String authority) {
         this.email = email;
         this.password = password;
         this.department = department;
