@@ -11,13 +11,13 @@ import java.security.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "class")
-public class Lecture {
+@Table(name = "Lecture")
+public class Lecture extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String lecture_name;
 
     @Column(nullable = false)
@@ -32,7 +32,7 @@ public class Lecture {
     @Column(nullable = false)
     private Timestamp registrationDate; // 타입 임시 지정
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String teacher;
 
     public Lecture(Long id, String lecture_name, Long price, String introduction, String category, Timestamp registrationDate) {
