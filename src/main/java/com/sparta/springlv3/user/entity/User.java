@@ -22,6 +22,7 @@ public class User {
     private String password;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING) // Enum 값과 매핑
     private String department;
 
     @Column(nullable = false)
