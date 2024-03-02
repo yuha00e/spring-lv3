@@ -22,7 +22,8 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private String department;
+    @Enumerated(EnumType.STRING) // Enum 값과 매핑
+    private DepartmentEnum department;
 
     @Column(nullable = false)
     private String auth;
@@ -31,12 +32,13 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    public User(String email, String password, String selectedDepartmentString, String authority) {
+    public User(String email, String password, DepartmentEnum selectedDepartmentString, String auth) {
         this.email = email;
         this.password = password;
         this.department = selectedDepartmentString;
         this.auth = auth;
     }
+
 }
 
 

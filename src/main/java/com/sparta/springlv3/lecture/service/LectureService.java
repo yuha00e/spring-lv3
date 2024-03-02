@@ -9,6 +9,7 @@ import com.sparta.springlv3.lecture.repository.LectureRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class LectureService {
     private final LectureRepository lectureRepository;
 
     // 강의 등록 기능
+
     public LectureResponseDto createLecture(LectureRequestDto lectureRequestDto) {
         // RequestDto -> Entity
         Lecture lecture = new Lecture(lectureRequestDto);
@@ -27,7 +29,7 @@ public class LectureService {
         Lecture saveLecture = lectureRepository.save(lecture);
 
         // Entity -> ResponseDto
-        LectureResponseDto lectureResponseDto = new LectureResponseDto(lecture);
+        LectureResponseDto lectureResponseDto = new LectureResponseDto(saveLecture);
 
         return lectureResponseDto;
     }
