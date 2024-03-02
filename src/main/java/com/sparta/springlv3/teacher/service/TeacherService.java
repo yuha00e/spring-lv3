@@ -71,6 +71,7 @@ public class TeacherService {
     public List<TeacherResponseDto> findTeacherLecture(Long teacherId) {
 
 //        ------------------- 첫번째 방법 --------------------------------
+
 //        + teacher entity @one to many 메소드 / + DB 연결하기
 //        // 강사 조회
 //        Teacher teacher = findTeacher(teacherId);
@@ -87,6 +88,7 @@ public class TeacherService {
 //                .collect(Collectors.toList());
 
 //        -------------------------- 두번째 방법 ---------------------------
+
 //          + lecture repository에 쿼리문 넣기
 //        @Query("SELECT l FROM Lecture l WHERE l.teacher.id = :teacherId ORDER BY l.createdAt DESC")
 //        List<Lecture> findLecturesByTeacherIdOrderByCreatedAtDesc(Long teacherId);
@@ -100,12 +102,6 @@ public class TeacherService {
                 .collect(Collectors.toList());
 
     }
-
-    //           선택한 강사가 촬영한 강의 목록 조회 기능
-//    - 선택한 강사가 촬영한 강의를 조회할 수 있습니다.
-//
-//            - 조회된 강의 목록은 `등록일` 기준 내림차순으로 정렬 되어있습니다.
-
 
     // 강사 조회 메서드
     private Teacher findTeacher(Long teacherId) {
