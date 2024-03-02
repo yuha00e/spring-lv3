@@ -1,4 +1,4 @@
-package com.sparta.springlv3.dto;
+package com.sparta.springlv3.teacher.dto;
 
 import lombok.Getter;
 

@@ -1,9 +1,9 @@
-package com.sparta.springlv3.service;
+package com.sparta.springlv3.teacher.service;
 
 
-import com.sparta.springlv3.dto.TeacherRequestDto;
-import com.sparta.springlv3.dto.TeacherResponseDto;
-import com.sparta.springlv3.repository.TeacherRepository;
+import com.sparta.springlv3.teacher.dto.TeacherRequestDto;
+import com.sparta.springlv3.teacher.dto.TeacherResponseDto;
+import com.sparta.springlv3.teacher.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.sparta.springlv3.entity;
+package com.sparta.springlv3.teacher.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

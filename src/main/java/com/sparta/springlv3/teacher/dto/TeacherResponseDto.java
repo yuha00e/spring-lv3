@@ -1,6 +1,6 @@
-package com.sparta.springlv3.dto;
+package com.sparta.springlv3.teacher.dto;
 
-import com.sparta.springlv3.entity.Teacher;
+import com.sparta.springlv3.teacher.entity.Teacher;
 import lombok.Getter;
 
 @Getter
@@ -19,3 +19,5 @@ public class TeacherResponseDto {
         this.introduction = teacher.getIntroduction();
     }
 }
+
+
