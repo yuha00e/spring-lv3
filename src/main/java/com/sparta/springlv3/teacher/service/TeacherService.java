@@ -3,9 +3,12 @@ package com.sparta.springlv3.teacher.service;
 
 import com.sparta.springlv3.teacher.dto.TeacherRequestDto;
 import com.sparta.springlv3.teacher.dto.TeacherResponseDto;
+import com.sparta.springlv3.teacher.entity.Teacher;
 import com.sparta.springlv3.teacher.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -16,46 +19,91 @@ public class TeacherService {
 
     // 강사 등록 기능
     public TeacherResponseDto createTeacher(TeacherRequestDto teacherRequestDto) {
-        return null;
-    }
 
-    //    강사 등록 기능
-//    - `이름`, `경력(년차)`, `회사`, `전화번호`, `소개`를 저장할 수 있습니다.
-//            - 로그인을 통해 발급받은 JWT가 함께 요청됩니다.
-//            - 관리자만 강사 등록이 가능합니다.
-//            - 등록된 강사의 정보를 반환 받아 확인할 수 있습니다.
+        // RequestDto -> Entity
+        Teacher teacher = new Teacher(teacherRequestDto);
+
+        // DB에 저장
+        Teacher saveTeacher = teacherRepository.save(teacher);
+
+        // Entity -> ResponseDto
+        TeacherResponseDto teacherResponseDto = new TeacherResponseDto(teacher);
+
+        return teacherResponseDto;
+    }
 
     // 선택한 강사 정보 수정
-    public TeacherResponseDto infoTeacher(TeacherRequestDto teacherRequestDto) {
-        return null;
-    }
+    public TeacherResponseDto infoTeacher(Long teacherId, TeacherRequestDto teacherRequestDto) {
 
-    //        선택한 강사 정보 수정 기능
-//    - 선택한 강사의 `경력`, `회사`, `전화번호`, `소개`를 수정할 수 있습니다.
-//            - 로그인을 통해 발급받은 JWT가 함께 요청됩니다.
-//            - MANAGER  권한을 가진 관리자만 강사 정보 수정이 가능합니다.
-//            - 수정된 강사의 정보를 반환 받아 확인할 수 있습니다.
+        // 선택한 강사 정보 조회
+        Teacher teacher = findTeacher(teacherId);
+
+        // 강사 정보 수정
+        teacher.setCareer(teacherRequestDto.getCareer());
+        teacher.setCompany(teacherRequestDto.getCompany());
+        teacher.setPhone(teacherRequestDto.getPhone());
+        teacher.setIntroduction(teacherRequestDto.getIntroduction());
+
+        // 변경된 강사 정보를 DB에 저장
+        teacher = teacherRepository.save(teacher);
+
+        return new TeacherResponseDto(teacher);
+    }
 
     // 선택한 강사 조회
     public TeacherResponseDto updateTeacher(Long teacherId) {
-        return null;
+
+        // 선택한 강사가 teacher DB에 존재하는지 확인
+        Teacher teacher = findTeacher(teacherId);
+
+        return new TeacherResponseDto(teacher);
     }
 
-    //    선택한 강사 조회 기능
-//    - 선택한 강사의 정보를 조회할 수 있습니다.
-//            - 로그인을 통해 발급받은 JWT가 함께 요청됩니다.
-//            - 관리자만 강사 조회가 가능합니다.
-//
 
     // 선택한 강사가 촬영한 강의 목록 조회
-    public TeacherResponseDto findTeacher(Long teacherId, Long lectureId) {
+    public List<TeacherResponseDto> findTeacherLecture(Long teacherId) {
+
+//        ------------------- 첫번째 방법 --------------------------------
+//        + teacher entity @one to many 메소드 / + DB 연결하기
+//        // 강사 조회
+//        Teacher teacher = findTeacher(teacherId);
+//
+//        // 강사의 강의 목록 가져오기
+//        List<Lecture> teacherLectures = teacher.getLectures();
+//
+//        // 강의 목록을 등록일 기준으로 내림차순 정렬
+//        Collections.sort(teacherLectures, Comparator.comparing(Lecture::getCreatedAt).reversed());
+//
+//        // 조회된 강의 목록을 DTO 형식으로 변환하여 반환합니다.
+//        return teacherLectures.stream()
+//                .map(TeacherResponseDto::new) // 각 요소에 대해 객체 생성하는것. lecture 연결 후 생성자 고쳐보기
+//                .collect(Collectors.toList());
+
+//        -------------------------- 두번째 방법 ---------------------------
+//          + lecture repository에 쿼리문 넣기
+//        @Query("SELECT l FROM Lecture l WHERE l.teacher.id = :teacherId ORDER BY l.createdAt DESC")
+//        List<Lecture> findLecturesByTeacherIdOrderByCreatedAtDesc(Long teacherId);
+
+//        // Repository에서 JPQL 쿼리를 호출하여 선택한 강사가 촬영한 강의 목록을 조회합니다.
+//        List<Lecture> teacherLectures = lectureRepository.findLecturesByTeacherIdOrderByCreatedAtDesc(teacherId);
+//
+//        // 조회된 강의 목록을 DTO 형식으로 변환하여 반환합니다.
+//        return teacherLectures.stream()
+//                .map(TeacherResponseDto::new)
+//                .collect(Collectors.toList());
         return null;
     }
 
     //           선택한 강사가 촬영한 강의 목록 조회 기능
 //    - 선택한 강사가 촬영한 강의를 조회할 수 있습니다.
-//        - 로그인을 통해 발급받은 JWT가 함께 요청됩니다.
-//            - 관리자만 강의 조회가 가능합니다.
+//
 //            - 조회된 강의 목록은 `등록일` 기준 내림차순으로 정렬 되어있습니다.
+
+
+    // 강사 조회 메서드
+    private Teacher findTeacher(Long teacherId) {
+        return teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 강사는 존재하지 않습니다."));
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.sparta.springlv3.teacher.entity;
 
+import com.sparta.springlv3.teacher.dto.TeacherRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,11 +31,14 @@ public class Teacher {
     @Column(nullable = false)
     private String introduction;
 
-    public Teacher(String teacher_name, int career, String company, String phone, String introduction) {
-        this.teacher_name = teacher_name;
-        this.career = career;
-        this.company = company;
-        this.phone = phone;
-        this.introduction = introduction;
+//    @OneToMany(mappedBy = "teacher")
+//    private List<Lecture> lectures = new ArrayList<>();
+
+    public Teacher(TeacherRequestDto teacherRequestDto) {
+        this.teacher_name = teacherRequestDto.getTeacher_name();
+        this.career = teacherRequestDto.getCareer();
+        this.company = teacherRequestDto.getCompany();
+        this.phone = teacherRequestDto.getPhone();
+        this.introduction = teacherRequestDto.getIntroduction();
     }
 }
