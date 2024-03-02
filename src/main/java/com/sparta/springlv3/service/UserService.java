@@ -29,12 +29,6 @@ public class UserService {
         String auth = requestDto.getAuth(); // 사용자 아이디 생성
         String department = requestDto.getDepartment(); // 부서 코드 가져오기
 
-//        // email 중복확인
-//        Optional<User> checkEmail = userRepository.findByEmail(email);
-//        if (checkEmail.isPresent()) {
-//            throw new IllegalArgumentException("중복된 Email 입니다.");
-//        }
-
         // 이메일 형식 검증을 위한 정규 표현식
         final String EMAIL_PATTERN = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         // 이메일 유효성 검사
@@ -79,6 +73,12 @@ public class UserService {
 
         throw new IllegalArgumentException("관리자 가입이 성공적으로 완료되었습니다.");
 
+
+//         email 중복확인
+//        Optional<User> checkEmail = userRepository.findByEmail(email);
+//        if (checkEmail.isPresent()) {
+//            throw new IllegalArgumentException("중복된 Email 입니다.");
+//        }
     }
 
 }
