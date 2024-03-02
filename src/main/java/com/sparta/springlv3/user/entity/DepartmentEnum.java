@@ -5,6 +5,7 @@ public enum DepartmentEnum {
     MARKETING (Department.MARKETING), // 마케팅
     DEVELOPMENT (Department.DEVELOPMENT); // 개발
 
+
     private final String department;
 
     DepartmentEnum(String department) { // 생성자

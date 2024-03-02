@@ -66,7 +66,7 @@ public class UserService {
         }
 
         // 사용자 등록
-        User user = new User(email, password, selectedDepartmentString, auth);
+        User user = new User(email, password, DepartmentEnum.valueOf(selectedDepartmentString), auth);
         userRepository.save(user);
 
         throw new IllegalArgumentException("관리자 가입이 성공적으로 완료되었습니다.");
