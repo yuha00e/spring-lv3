@@ -1,5 +1,6 @@
 package com.sparta.springlv3.lecture.entity;
 
+import com.sparta.springlv3.teacher.entity.Teacher;
 import com.sparta.springlv3.user.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -33,8 +34,10 @@ public class Lecture extends Timestamped {
     @Column(nullable = false)
     private Timestamp registrationDate; // 타입 임시 지정
 
-    @Column(nullable = false)
-    private String teacher;
+    // Teacher와의 다대일 관계 설정
+    @ManyToOne
+    @JoinColumn(name = "teacher_id") // Teacher 엔티티 클래스의 id 필드와 매핑
+    private Teacher teacher;
 
     public Lecture(Long id, String lecture_name, Long price, String introduction, String category, Timestamp registrationDate) {
         this.id = id;

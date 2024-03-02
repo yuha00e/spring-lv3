@@ -1,20 +1,27 @@
 package com.sparta.springlv3.teacher.service;
 
 
+import com.sparta.springlv3.lecture.entity.Lecture;
+import com.sparta.springlv3.lecture.repository.LectureRepository;
 import com.sparta.springlv3.teacher.dto.TeacherRequestDto;
 import com.sparta.springlv3.teacher.dto.TeacherResponseDto;
 import com.sparta.springlv3.teacher.entity.Teacher;
 import com.sparta.springlv3.teacher.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class TeacherService {
 
     private final TeacherRepository teacherRepository;
+    private final LectureRepository lectureRepository;
 
 
     // 강사 등록 기능
@@ -84,14 +91,14 @@ public class TeacherService {
 //        @Query("SELECT l FROM Lecture l WHERE l.teacher.id = :teacherId ORDER BY l.createdAt DESC")
 //        List<Lecture> findLecturesByTeacherIdOrderByCreatedAtDesc(Long teacherId);
 
-//        // Repository에서 JPQL 쿼리를 호출하여 선택한 강사가 촬영한 강의 목록을 조회합니다.
-//        List<Lecture> teacherLectures = lectureRepository.findLecturesByTeacherIdOrderByCreatedAtDesc(teacherId);
-//
-//        // 조회된 강의 목록을 DTO 형식으로 변환하여 반환합니다.
-//        return teacherLectures.stream()
-//                .map(TeacherResponseDto::new)
-//                .collect(Collectors.toList());
-        return null;
+        // Repository에서 JPQL 쿼리를 호출하여 선택한 강사가 촬영한 강의 목록을 조회합니다.
+        List<Lecture> teacherLectures = lectureRepository.findLecturesByTeacherIdOrderByCreatedAtDesc(teacherId);
+
+        // 조회된 강의 목록을 DTO 형식으로 변환하여 반환합니다.
+        return teacherLectures.stream()
+                .map(TeacherResponseDto::new)
+                .collect(Collectors.toList());
+
     }
 
     //           선택한 강사가 촬영한 강의 목록 조회 기능
