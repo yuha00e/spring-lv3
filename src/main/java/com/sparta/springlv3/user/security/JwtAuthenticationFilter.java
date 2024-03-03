@@ -28,6 +28,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // 로그인 시도 처리
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        log.info("로그인 시도");
         try {
             // 요청 본문에서 로그인 정보를 추출하여 LoginRequestDto 객체로 변환
             LoginRequestDto requestDto = new ObjectMapper().readValue(request.getInputStream(), LoginRequestDto.class);
@@ -49,13 +50,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // 로그인 성공 처리
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
+
         // 인증 결과에서 사용자 정보와 권한(Role) 추출
-        String username = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
+        String email = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
         UserRoleEnum role = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getRole();
         // JWT 토큰 생성
-        String token = jwtUtil.createToken(username, role);
+        String token = jwtUtil.createToken(email, role);
         // HTTP 응답 헤더에 JWT 토큰 추가
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
+
+        // 로그인 성공 메시지를 로그에 출력
+        log.info("사용자 '{}'의 로그인 성공", email);
+
     }
 
     // 로그인 실패 처리
@@ -63,6 +69,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
         // 인증 실패 시 401 Unauthorized 상태 코드 반환
         response.setStatus(401);
+
+        // 로그인 실패 메시지를 로그에 출력
+        log.info("로그인 실패: {}", failed.getMessage());
+
     }
 
 }

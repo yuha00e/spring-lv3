@@ -2,21 +2,26 @@ package com.sparta.springlv3.user.controller;
 
 import com.sparta.springlv3.user.dto.SignupRequestDto;
 import com.sparta.springlv3.user.dto.UserInfoDto;
+import com.sparta.springlv3.user.exception.NotFoundException;
+import com.sparta.springlv3.user.exception.UnauthorizedException;
 import com.sparta.springlv3.user.security.UserDetailsImpl;
 import com.sparta.springlv3.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.function.Supplier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @Slf4j
 @Controller
