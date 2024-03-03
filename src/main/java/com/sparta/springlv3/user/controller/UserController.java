@@ -1,6 +1,7 @@
 package com.sparta.springlv3.user.controller;
 
 import com.sparta.springlv3.user.dto.SignupRequestDto;
+import com.sparta.springlv3.user.dto.SignupResponseDto;
 import com.sparta.springlv3.user.dto.UserInfoDto;
 import com.sparta.springlv3.user.exception.NotFoundException;
 import com.sparta.springlv3.user.exception.UnauthorizedException;
@@ -18,10 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.function.Supplier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
