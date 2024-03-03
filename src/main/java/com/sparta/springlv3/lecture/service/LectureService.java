@@ -9,7 +9,6 @@ import com.sparta.springlv3.lecture.repository.LectureRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
