@@ -2,9 +2,10 @@ package com.sparta.springlv3.user.service;
 
 
 import com.sparta.springlv3.user.dto.SignupRequestDto;
+import com.sparta.springlv3.user.dto.SignupResponseDto;
 import com.sparta.springlv3.user.entity.DepartmentEnum;
-import com.sparta.springlv3.user.entity.User;
 import com.sparta.springlv3.user.entity.UserRoleEnum;
+import com.sparta.springlv3.user.entity.User;
 import com.sparta.springlv3.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,20 +19,17 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    
 
     // ADMIN_TOKEN
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
-
-    /// 회원 가입
-    public void signup(SignupRequestDto requestDto) {  // 회원가입할 데이터를 requestDto 로 받아와
-//        String username = requestDto.getUsername();  // requestDto 에서 getUsername 가져와 변수 username 에 담음.
+    // 회원 가입
+    public SignupResponseDto signup(SignupRequestDto requestDto) {
         String email = requestDto.getEmail();  // requestDto 에서 getUsername 가져와 변수 username 에 담음.
         String password = passwordEncoder.encode(requestDto.getPassword());  // 평문을 암호화 해서 password 에 담음.
 
-//        // 회원 중복 확인
-//        Optional<User> checkUsername = userRepository.findByUsername(username);  // Optional 타입으로 받음. null 체크하기 위해 만들어진 타입(값이 없으면 NULL, 있다면 값을 넣어줌) // userRepository 에 findByUsername 쿼리 메서드 작성해보자.
+        // 회원 중복 확인
+//        Optional<User> checkUsername = userRepository.findByEmail(email);  // Optional 타입으로 받음. null 체크하기 위해 만들어진 타입(값이 없으면 NULL, 있다면 값을 넣어줌) // userRepository 에 findByUsername 쿼리 메서드 작성해보자.
 //        if (checkUsername.isPresent()) {   // isPresent : 현재 Optional 에 넣어준 값이 존재하는 지 확인 메서드
 //            throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
 //        }
@@ -44,22 +42,24 @@ public class UserService {
         }
 
         // 사용자 ROLE 확인 (권한확인)
-        UserRoleEnum auth = UserRoleEnum.STAFF;  // 일반 사용자 권한을 넣어놓은다.
+        UserRoleEnum role = UserRoleEnum.STAFF;  // 일반 사용자 권한을 넣어놓은다.
         // 사용자 department 확인
         DepartmentEnum department = DepartmentEnum.valueOf(requestDto.getDepartment());
         if (department != DepartmentEnum.MARKETING) {   // boolean type 은 is 로 시작함(규칙), isAdmin // (true)면 관리자 권한으로 회원가입
             if (!ADMIN_TOKEN.equals(requestDto.getAdminToken())) {
                 throw new IllegalArgumentException("관리자 암호가 틀려 등록이 불가능합니다.");
             }
-            auth = UserRoleEnum.MANAGER;  // 위에서 USER -> ADMIN 권한으로 덮어짐.
+            role = UserRoleEnum.MANAGER;  // 위에서 USER -> ADMIN 권한으로 덮어짐.
         }
 
         // 사용자 등록
-        User user = new User(email, password, department, auth);  // 등록하려면 user entity 클래스 객체를 만듦 : JPA 에서 Entity class 객체 하나가 DB의 한 열과 같다. (안의 내용은 생성자) 생성자를 통해서 만듦. 빨간 밑줄 뜨면 Create Constructor ^^
+        User user = new User(email,password, department ,role);  // 등록하려면 user entity 클래스 객체를 만듦 : JPA 에서 Entity class 객체 하나가 DB의 한 열과 같다. (안의 내용은 생성자) 생성자를 통해서 만듦. 빨간 밑줄 뜨면 Create Constructor ^^
         userRepository.save(user);
+        return new SignupResponseDto(user);
     }
+
 //    // 회원가입
-//    public void signup(SignupRequestDto requestDto) {
+//    public String signup(SignupRequestDto requestDto) {
 //        String email = requestDto.getEmail();
 //        String password = passwordEncoder.encode(requestDto.getPassword());
 //        String auth = requestDto.getAuth(); // 사용자 아이디 생성
@@ -107,14 +107,15 @@ public class UserService {
 //        User user = new User(email, password, DepartmentEnum.valueOf(selectedDepartmentString), auth);
 //        userRepository.save(user);
 //
-//        throw new IllegalArgumentException("관리자 가입이 성공적으로 완료되었습니다.");
+////        throw new IllegalArgumentException("관리자 가입이 성공적으로 완료되었습니다.");
+//
+//        return userResponseDto(user);
+//
+////         email 중복확인
+////        Optional<User> checkEmail = userRepository.findByEmail(email);
+////        if (checkEmail.isPresent()) {
+////            throw new IllegalArgumentException("중복된 Email 입니다.");
+////        }
+//    }
 
-
-//         email 중복확인
-//        Optional<User> checkEmail = userRepository.findByEmail(email);
-//        if (checkEmail.isPresent()) {
-//            throw new IllegalArgumentException("중복된 Email 입니다.");
-//        }
 }
-
-

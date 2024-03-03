@@ -1,23 +1,29 @@
 package com.sparta.springlv3.user.controller;
 
 import com.sparta.springlv3.user.dto.SignupRequestDto;
+import com.sparta.springlv3.user.dto.SignupResponseDto;
 import com.sparta.springlv3.user.dto.UserInfoDto;
+import com.sparta.springlv3.user.dto.UserResponseDto;
 import com.sparta.springlv3.user.exception.NotFoundException;
 import com.sparta.springlv3.user.exception.UnauthorizedException;
 import com.sparta.springlv3.user.security.UserDetailsImpl;
 import com.sparta.springlv3.user.service.UserService;
 import jakarta.validation.Valid;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.function.Supplier;
+
 
 import java.util.List;
-import java.util.function.Supplier;
 
 @Slf4j
 @RestController
@@ -30,7 +36,7 @@ public class UserController {
     // 로그인 페이지
     @GetMapping("/user/login-page")
     public String loginPage() {
-        return "login";
+        return "login 됐다!!";
     }
 
     // 회원가입 페이지
@@ -41,7 +47,7 @@ public class UserController {
 
     // 회원 가입
     @PostMapping("/user/signup")
-    public ResponseEntity<?> signup(@Valid @RequestBody SignupRequestDto signupRequestDto, BindingResult bindingResult) {
+    public ResponseEntity<SignupResponseDto> signup(@Valid @RequestBody SignupRequestDto requestDto, BindingResult bindingResult) {
         // Validation 예외처리
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if (!fieldErrors.isEmpty()) {
@@ -50,28 +56,36 @@ public class UserController {
             }
         }
 
-        return handleRequest(() -> {
-            userService.signup(signupRequestDto);
-            return ResponseEntity.ok("성공적으로 회원가입이 완료되었습니다.");
-        });
+        return ResponseEntity.status(HttpStatus.OK).body(userService.signup(requestDto));
     }
 
-//    //회원가입처리
+
+
+
+//        return handleRequest(() -> {
+//            userService.signup(requestDto);
+//            return ResponseEntity.ok("성공적으로 회원가입이 완료되었습니다.");
+//        });
+
+
+
+//    회원가입처리
 //    @PostMapping("/user/signup")
-//    public String signup(@Valid SignupRequestDto requestDto, BindingResult bindingResult) {
+//    public ResponseEntity<SignupResponseDto> signup(@Valid SignupRequestDto requestDto, BindingResult bindingResult) {
 //        // Validation 예외처리
 //        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-//        if (fieldErrors.size() > 0) {
+//        if(fieldErrors.size() > 0) {
 //            for (FieldError fieldError : bindingResult.getFieldErrors()) {
 //                log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
 //            }
-//            return "redirect:/api/user/signup";
+//
 //        }
+//        return ResponseEntity.status(HttpStatus.OK).body(userService.signup(requestDto));
 //
-//        userService.signup(requestDto);
-//
-//        return "redirect:/api/user/login-page";
+////        userService.signup(requestDto);
+////        return "성공적으로 회원가입이 되셨습니다.";
 //    }
+
 
     private ResponseEntity<?> handleRequest(Supplier<ResponseEntity<?>> supplier) {
         try {
@@ -95,7 +109,7 @@ public class UserController {
 //        UserRoleEnum role = userDetails.getUser().getRole();
 //        boolean isAdmin = (role == UserRoleEnum.MANAGER);
 
-        return new UserInfoDto(userEmail, password);
+        return new UserInfoDto(userEmail,password);
 //        return new UserInfoDto(userEmail, isAdmin);
     }
 }
