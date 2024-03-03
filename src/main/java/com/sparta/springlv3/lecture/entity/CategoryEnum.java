@@ -7,9 +7,11 @@ public enum CategoryEnum {
     NODE (Category.NODE); // 노드
 
 
+
     private final String category;
 
     CategoryEnum (String category) {
+
         this.category = category;
     }
 

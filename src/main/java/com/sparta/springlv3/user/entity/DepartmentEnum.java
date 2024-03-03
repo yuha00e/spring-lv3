@@ -1,9 +1,9 @@
 package com.sparta.springlv3.user.entity;
 
 public enum DepartmentEnum {
-    CURRICULUM (Department.CURRICULUM), // 커리큘럼
-    MARKETING (Department.MARKETING), // 마케팅
-    DEVELOPMENT (Department.DEVELOPMENT); // 개발
+    CURRICULUM(Department.CURRICULUM), // 커리큘럼
+    MARKETING(Department.MARKETING), // 마케팅
+    DEVELOPMENT(Department.DEVELOPMENT); // 개발
 
 
     private final String department;
