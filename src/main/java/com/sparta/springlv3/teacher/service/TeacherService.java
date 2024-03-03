@@ -34,7 +34,7 @@ public class TeacherService {
         Teacher saveTeacher = teacherRepository.save(teacher);
 
         // Entity -> ResponseDto
-        TeacherResponseDto teacherResponseDto = new TeacherResponseDto(teacher);
+        TeacherResponseDto teacherResponseDto = new TeacherResponseDto(saveTeacher);
 
         return teacherResponseDto;
     }
@@ -94,7 +94,7 @@ public class TeacherService {
 //        List<Lecture> findLecturesByTeacherIdOrderByCreatedAtDesc(Long teacherId);
 
         // Repository에서 JPQL 쿼리를 호출하여 선택한 강사가 촬영한 강의 목록을 조회합니다.
-        List<Lecture> teacherLectures = lectureRepository.findLecturesByTeacherIdOrderByCreatedAtDesc(teacherId);
+        List<Lecture> teacherLectures = lectureRepository.findLecturesByTeacherIdOrderByRegistrationDateDesc(teacherId);
 
         // 조회된 강의 목록을 DTO 형식으로 변환하여 반환합니다.
         return teacherLectures.stream()

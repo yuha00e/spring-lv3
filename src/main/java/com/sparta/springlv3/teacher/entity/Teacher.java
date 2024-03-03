@@ -23,6 +23,11 @@ public class Teacher {
     @Column(nullable = false, unique = true)
     private String teacher_name;
 
+//   생성자 추가
+//    public Teacher(String teacherName) {
+//        this.teacherName = teacherName;
+//    }
+
     @Column(nullable = false)
     private int career;
 
@@ -36,7 +41,10 @@ public class Teacher {
     private String introduction;
 
     // Lecture와의 일대다 관계 설정
-    @OneToMany(mappedBy = "teacher") // mappedBy 속성은 Lecture 엔티티 클래스에 있는 teacher 필드를 지정
+//    @OneToMany(mappedBy = "teacher") // mappedBy 속성은 Lecture 엔티티 클래스에 있는 teacher 필드를 지정
+//    private List<Lecture> lectures = new ArrayList<>();
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private List<Lecture> lectures = new ArrayList<>();
 
     public Teacher(TeacherRequestDto teacherRequestDto) {
@@ -46,4 +54,9 @@ public class Teacher {
         this.phone = teacherRequestDto.getPhone();
         this.introduction = teacherRequestDto.getIntroduction();
     }
+
+    public Teacher(String teacherName) {
+        this.teacher_name = teacherName;
+    }
+
 }

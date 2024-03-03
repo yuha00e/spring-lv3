@@ -6,6 +6,8 @@ import com.sparta.springlv3.lecture.dto.LectureResponseDto;
 import com.sparta.springlv3.lecture.entity.CategoryEnum;
 import com.sparta.springlv3.lecture.entity.Lecture;
 import com.sparta.springlv3.lecture.repository.LectureRepository;
+import com.sparta.springlv3.teacher.dto.TeacherRequestDto;
+import com.sparta.springlv3.teacher.entity.Teacher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class LectureService {
     // 강의 등록 기능
 
     public LectureResponseDto createLecture(LectureRequestDto lectureRequestDto) {
+
+
         // RequestDto -> Entity
         Lecture lecture = new Lecture(lectureRequestDto);
 
@@ -44,10 +48,10 @@ public class LectureService {
         // 강의 정보 수정
         lecture.setLectureName(lectureRequestDto.getLectureName());
         lecture.setPrice(lectureRequestDto.getPrice());
-        lecture.setIntroduction(lectureRequestDto.getIntroduction());
+        lecture.setIntroductionL(lectureRequestDto.getIntroductionL());
         lecture.setCategory(CategoryEnum.valueOf(lectureRequestDto.getCategory())); // 카테고리 수정
         lecture.setRegistrationDate(lectureRequestDto.getRegistrationDate()); // 등록일 수정
-        lecture.setTeacher(lectureRequestDto.getTeacher()); // 강사 수정
+        lecture.setTeacher(lectureRequestDto.getTeacher_name()); // 강사 수정
 
         // 변경된 강의 정보 DB에 저장
         lecture = lectureRepository.save(lecture);

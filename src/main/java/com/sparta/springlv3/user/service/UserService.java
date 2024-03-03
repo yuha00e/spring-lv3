@@ -41,6 +41,9 @@ public class UserService {
             throw new IllegalArgumentException("중복된 Email 입니다.");
         }
 
+
+
+
         // 사용자 ROLE 확인 (권한확인)
         UserRoleEnum role = UserRoleEnum.STAFF;  // 일반 사용자 권한을 넣어놓은다.
         // 사용자 department 확인

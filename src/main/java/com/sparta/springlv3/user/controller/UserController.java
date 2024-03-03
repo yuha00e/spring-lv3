@@ -1,9 +1,6 @@
 package com.sparta.springlv3.user.controller;
 
-import com.sparta.springlv3.user.dto.SignupRequestDto;
-import com.sparta.springlv3.user.dto.SignupResponseDto;
-import com.sparta.springlv3.user.dto.UserInfoDto;
-import com.sparta.springlv3.user.dto.UserResponseDto;
+import com.sparta.springlv3.user.dto.*;
 import com.sparta.springlv3.user.exception.NotFoundException;
 import com.sparta.springlv3.user.exception.UnauthorizedException;
 import com.sparta.springlv3.user.security.UserDetailsImpl;
@@ -15,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -36,7 +34,7 @@ public class UserController {
     // 로그인 페이지
     @GetMapping("/user/login-page")
     public String loginPage() {
-        return "login 됐다!!";
+        return "login";
     }
 
     // 회원가입 페이지
@@ -55,9 +53,17 @@ public class UserController {
                 log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
             }
         }
-
         return ResponseEntity.status(HttpStatus.OK).body(userService.signup(requestDto));
     }
+
+    // 로그인
+//    @PostMapping("/user/login")
+//    public ResponseEntity<UserResponseDto> login (@RequestBody LoginRequestDto loginRequestDto) {
+//        try {
+//            // 사용자 인증
+//            UserDetails userDetails = userService.
+//        }
+//    }
 
 
 
