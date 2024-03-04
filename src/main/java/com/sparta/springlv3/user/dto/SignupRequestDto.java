@@ -22,8 +22,6 @@ public class SignupRequestDto {
     @NotBlank
     private String auth;
 
-    @NotBlank
-    private String createUserId;
 
     private boolean admin = false;
     private String adminToken = "";
