@@ -70,8 +70,6 @@ public class TeacherService {
     // 선택한 강사가 촬영한 강의 목록 조회
     public List<LectureResponseDto> findTeacherLecture(Long teacherId) {
 
-//        ------------------- 첫번째 방법 --------------------------------
-
 //        + teacher entity @one to many 메소드 / + DB 연결하기
         // 강사 조회
         Teacher teacher = findTeacher(teacherId);
@@ -87,20 +85,6 @@ public class TeacherService {
                 .map(LectureResponseDto::new) // 각 요소에 대해 객체 생성하는것. lecture 연결 후 생성자 고쳐보기
                 .collect(Collectors.toList());
 
-
-//        -------------------------- 두번째 방법 ---------------------------
-
-//          + lecture repository에 쿼리문 넣기
-//        @Query("SELECT l FROM Lecture l WHERE l.teacher.id = :teacherId ORDER BY l.createdAt DESC")
-//        List<Lecture> findLecturesByTeacherIdOrderByCreatedAtDesc(Long teacherId);
-
-//         Repository에서 JPQL 쿼리를 호출하여 선택한 강사가 촬영한 강의 목록을 조회합니다.
-//        List<Lecture> teacherLectures = lectureRepository.findLecturesByTeacherIdOrderByRegistrationDateDesc(teacherId);
-//
-//        // 조회된 강의 목록을 DTO 형식으로 변환하여 반환합니다.
-//        return teacherLectures.stream()
-//                .map(TeacherResponseDto::new)
-//                .collect(Collectors.toList());
 
     }
 

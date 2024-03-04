@@ -9,7 +9,5 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     Optional<Teacher> findById(Long id);
 
-//    @Query("SELECT l FROM Lecture l WHERE l.teacher.id = :teacherId ORDER BY l.createdAt DESC")
-//    List<Lecture> findByTeacherIdOrderByCreatedAtDesc(@Param("teacherId") Long teacherId);
 
 }

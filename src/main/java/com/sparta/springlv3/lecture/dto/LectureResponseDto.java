@@ -12,17 +12,14 @@ public class LectureResponseDto {
     private String lectureName; //강의명
     private Long price; //가격
     private String introL; //소개
-    //    private String introduction; //소개
     private CategoryEnum category; // 카테고리
     private LocalDate registrationDate;
-    //    private Timestamp registrationDate; // 타입 임시 지정 //등록일
     private Teacher teacher; //강사이름
 
     public LectureResponseDto(Lecture lecture) {
         this.lectureName = lecture.getLectureName();
         this.price = lecture.getPrice();
         this.introL = lecture.getIntroL();
-//        this.introduction = lecture.getIntroduction();
         this.category = lecture.getCategory();
         this.registrationDate = lecture.getRegistrationDate();
         this.teacher = lecture.getTeacher();

@@ -52,9 +52,6 @@ public class Teacher {
         this.id = id;
     }
 
-    // Lecture와의 일대다 관계 설정
-//    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)// mappedBy 속성은 Lecture 엔티티 클래스에 있는 teacher 필드를 지정
-//    private List<Lecture> lectures = new ArrayList<Lecture>();
 
     public Teacher(TeacherRequestDto teacherRequestDto) {
         this.teacher_name = teacherRequestDto.getTeacher_name();
