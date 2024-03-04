@@ -6,10 +6,9 @@ import com.sparta.springlv3.lecture.dto.LectureResponseDto;
 import com.sparta.springlv3.lecture.entity.CategoryEnum;
 import com.sparta.springlv3.lecture.entity.Lecture;
 import com.sparta.springlv3.lecture.repository.LectureRepository;
-import com.sparta.springlv3.teacher.dto.TeacherRequestDto;
-import com.sparta.springlv3.teacher.entity.Teacher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +27,6 @@ public class LectureService {
         // RequestDto -> Entity
         Lecture lecture = new Lecture(lectureRequestDto);
 
-        // DB에 저장
-        Lecture saveLecture = lectureRepository.save(lecture);
-
-        // Entity -> ResponseDto
-        LectureResponseDto lectureResponseDto = new LectureResponseDto(saveLecture);
-
-        return lectureResponseDto;
-    }
-
-
     // 선택한 강의 정보 수정
     public LectureResponseDto infoLecture(Long lectureId, LectureRequestDto lectureRequestDto) {
 
@@ -47,10 +36,10 @@ public class LectureService {
         // 강의 정보 수정
         lecture.setLectureName(lectureRequestDto.getLectureName());
         lecture.setPrice(lectureRequestDto.getPrice());
-        lecture.setIntroductionL(lectureRequestDto.getIntroductionL());
+        lecture.setIntroL(lectureRequestDto.getIntroL());
         lecture.setCategory(CategoryEnum.valueOf(lectureRequestDto.getCategory())); // 카테고리 수정
-        lecture.setRegistrationDate(lectureRequestDto.getRegistrationDate()); // 등록일 수정
-        lecture.setTeacher(lectureRequestDto.getTeacher_name()); // 강사 수정
+//        lecture.setRegistrationDate(lectureRequestDto.getRegistrationDate()); // 등록일 수정
+//        lecture.setTeacher(lectureRequestDto.getTeacher()); // 강사 수정
 
         // 변경된 강의 정보 DB에 저장
         lecture = lectureRepository.save(lecture);
