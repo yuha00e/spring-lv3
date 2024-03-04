@@ -20,12 +20,22 @@ public class LectureService {
     private final LectureRepository lectureRepository;
 
     // 강의 등록 기능
-
+    @Transactional
     public LectureResponseDto createLecture(LectureRequestDto lectureRequestDto) {
 
 
         // RequestDto -> Entity
         Lecture lecture = new Lecture(lectureRequestDto);
+
+        // DB에 저장
+        Lecture saveLecture = lectureRepository.save(lecture);
+
+        // Entity -> ResponseDto
+        LectureResponseDto lectureResponseDto = new LectureResponseDto(saveLecture);
+
+        return lectureResponseDto;
+    }
+
 
     // 선택한 강의 정보 수정
     public LectureResponseDto infoLecture(Long lectureId, LectureRequestDto lectureRequestDto) {
